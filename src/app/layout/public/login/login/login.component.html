@@ -1,29 +1,31 @@
-<div class="login card p-5 m-5 mt-3 d-flex justify-content-center align-items-center">
-  <div class="card-title">
-    <h3 class="text-light text-center">Iniciar Sesión</h3>
-  </div>
-  <div class="card-body">
-    <div class="row">
-      <div class="col-7">
-        <form [formGroup]="myForm" (ngSubmit)="submitFormulario()">
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label text-light">Correo electrónico</label>
-            <input formControlName="usuario" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+<div class="mt-5 d-flex justify-content-center align-items-center">
+  <div class="login card p-5 m-5 mt-3 d-flex justify-content-center align-items-center">
+    <div class="card-title">
+      <h3 class="text-light text-center">Iniciar Sesión</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-7">
+          <form [formGroup]="myForm" (ngSubmit)="submitFormulario()">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label text-light">Correo electrónico</label>
+              <input formControlName="usuario" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label text-light">Contraseña</label>
+              <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
+            </div>
+            <div class="mb-3 form-check">
+              <input formControlName="recordar"  type="checkbox" class="form-check-input" id="exampleCheck1">
+              <label class="form-check-label text-light" for="exampleCheck1">¿Recordar cuenta?</label>
+            </div>
+            <button type="submit" class="btn btn-success">Iniciar Sesión</button>
+          </form>
+        </div>
+        <div class="col-5">
+          <div class="mt-4">
+            <img src="assets/image/logo.png" class="img-fluid" width="250px">
           </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label text-light">Contraseña</label>
-            <input formControlName="password" type="password" class="form-control" id="exampleInputPassword1">
-          </div>
-          <div class="mb-3 form-check">
-            <input formControlName="recordar"  type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label text-light" for="exampleCheck1">¿Recordar cuenta?</label>
-          </div>
-          <button type="submit" class="btn btn-success">Iniciar Sesión</button>
-        </form>
-      </div>
-      <div class="col-5">
-        <div class="mt-4">
-          <img src="assets/image/logo.png" class="img-fluid" width="250px">
         </div>
       </div>
     </div>

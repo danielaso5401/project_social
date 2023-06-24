@@ -1,0 +1,17 @@
+<div class="card p-2">
+    <div class="row card-title ml-2"  style="background-color: rgb(14, 74, 131);"> 
+        <button class="col-auto btn"><span class="k-icon k-i-menu" style="color: white;"></span></button>
+        <h1 class="col-auto" style="color: white;">Home Paz Perú</h1>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <kendo-grid [data]="gridData"  id="my-grid">
+                <kendo-grid-column field="ProductID" title="ID"> </kendo-grid-column>
+                <kendo-grid-column field="ProductName" title="Name"> </kendo-grid-column>
+                <kendo-grid-column field="Category.CategoryName" title="Category">
+                </kendo-grid-column>
+                <kendo-grid-column field="UnitPrice" title="Price"> </kendo-grid-column>
+              </kendo-grid>
+        </div>
+    </div>
+</div>
