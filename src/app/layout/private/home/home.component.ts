@@ -1,7 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { RowClassArgs } from '@progress/kendo-angular-treelist';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { Size } from '@progress/kendo-drawing/dist/npm/geometry';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -10,49 +12,62 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent {
-  // constructor(
-  //   private modalService: BsModalService
-  // ){}
-  constructor(){}
-  public gridData: any = [
+  
+  constructor(
+    private modalService: NgbModal,
+    private formBuilder: FormBuilder
+  ){} 
+
+  form!: FormGroup;
+  
+  listaRoles: any = [
+    { nombre: "<Roles>", id: null},
+    { nombre: "Administrador", id: 1 },
+    { nombre: "Enfermera", id: 2 },
+    { nombre: "Psigcolaga", id: 3 },
+  ]; 
+
+  gridDataUsuarios : any = [
     {
-      ProductID: 1,
-      ProductName: "Chai",
-      UnitPrice: 18,
-      Category: {
-        CategoryID: 1,
-        CategoryName: "Beverages",
-      },
-    },
-    {
-      ProductID: 2,
-      ProductName: "Chang",
-      UnitPrice: 19,
-      Category: {
-        CategoryID: 1,
-        CategoryName: "Beverages",
-      },
-    },
-    {
-      ProductID: 3,
-      ProductName: "Aniseed Syrup",
-      UnitPrice: 10,
-      Category: {
-        CategoryID: 2,
-        CategoryName: "Condiments",
-      },
-    },
-  ];
+      id: 1,
+      nombres: "Daniel",
+      apellidos: "Huaita Carpio",
+      documentoIdentidad: "76655328",
+      fechaNacimiento: new Date(),
+      correoElectronico: "dhuaitac@ulasalle.edu.pe",
+      rol: {
+        id: 1,
+        nombre: "Administrador"
+      }
+    }
+  ]
+  
   ngOnInit(): void {
+    this.buildForm();
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
   }
+  buildForm() {
+    this.form = this.formBuilder.group({
+      nombres: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      documentoIdentidad: ['', Validators.required],
+      fechaNacimiento: ['', Validators.required],
+      correoElectronico: ['', [Validators.required, Validators.email]],
+      rol: [ null, Validators.required]
+    });
+  }
   eliminar_elemento(dataItem:any){
     console.log(dataItem);
-    this.gridData.splice(this.gridData.indexOf(dataItem), 1);
+    this.gridDataUsuarios.splice(this.gridDataUsuarios.indexOf(dataItem), 1);
   }
-  // abrir_modal(template: any){
-  //   console.log("abrir modal");
-  //   this.modalService.show(template, {class: 'modal-sm'});
-  // }
+  guardar_elemento(){
+    console.log(this.form.value);
+    this.gridDataUsuarios = this.gridDataUsuarios.concat(this.form.value);
+    this.modalService.dismissAll();
+  }
+  open(content:any) {
+    this.modalService.open(content, {size:"lg"});
+  }
+  
 }

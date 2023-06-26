@@ -1,22 +1,29 @@
 <div class="card m-5">
     <div class="card-title"  style="background-color: rgb(14, 74, 131);">
-        <h1 class="m-2" style="color: white;">(M) Usuarios</h1>
+        <h3 class="m-2" style="color: white;">(M) Usuarios</h3>
     </div>
-
     <div class="card-body">
         <div class="row">
-            <kendo-grid [data]="gridData"  id="my-grid" >
+            <kendo-grid [data]="gridDataUsuarios"  id="my-grid" >
                 <ng-template kendoGridToolbarTemplate>
-                  <button class="btn btn-success" kendoGridAddCommand>
+                  <button class="btn btn-success" kendoGridAddCommand (click)="open(mymodal)">
                     <span class="k-icon k-i-plus"></span>
                     Nuevo
                   </button>
                 </ng-template>
-                <kendo-grid-column field="ProductID" title="ID" [width]="40"> </kendo-grid-column>
-                <kendo-grid-column field="ProductName" title="Nombre"> </kendo-grid-column>
-                <kendo-grid-column field="Category.CategoryName" title="Categoria">
+                <kendo-grid-column field="id" title="ID" [width]="40"[hidden]="true"> </kendo-grid-column>
+                <kendo-grid-column field="nombres" title="Nombre"></kendo-grid-column>
+                <kendo-grid-column field="apellidos" title="Apellidos"></kendo-grid-column>
+                <kendo-grid-column field="documentoIdentidad" title="DNI"></kendo-grid-column>
+                <kendo-grid-column field="fechaNacimiento" title="Fecha Nacimiento">
+                  <ng-template kendoGridCellTemplate let-dataItem>
+                    {{dataItem.fechaNacimiento | date:'dd/MM/yyyy'}}
+                  </ng-template>
                 </kendo-grid-column>
-                <kendo-grid-column field="UnitPrice" title="Precio"> </kendo-grid-column>
+                <kendo-grid-column field="correoElectronico" title="Email">
+                </kendo-grid-column>
+                <kendo-grid-column field="rol.nombre" title="Rol">
+                </kendo-grid-column>
                 <kendo-grid-column title="Opciones" [width]="140">
                   <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem>
                     <button class="btn btn-warning m-1">
@@ -32,14 +39,65 @@
     </div>
 </div>
 
-<ng-template #modalTemplate>
-  <div class="modal-header">
-    <h4 class="modal-title">Título del Modal</h4>
-    <button type="button" class="close" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+<ng-template #mymodal let-modal>
+  <div class="modal-header text-white" style="background-color: rgb(14, 74, 131);">
+    <h4 class="modal-title" id="modal-basic-title">Crear Nuevo Usuario</h4>
   </div>
   <div class="modal-body">
-    Contenido del modal
+    <form [formGroup]="form">
+      <div class="form">
+        <div class="form-group row m-2">
+          <label for="nombres" class="col-sm-5 col-form-label">Nombres:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="nombres" formControlName="nombres" placeholder="Nombres Completos">
+          </div>
+        </div>
+        <div class="form-group row m-2">
+          <label for="apellidos" class="col-sm-5 col-form-label">Apellidos:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="apellidos" formControlName="apellidos" placeholder="Apellidos Completos">
+          </div>
+        </div>
+        <div class="form-group row m-2">
+          <label for="dni" class="col-sm-5 col-form-label">DNI:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="documentoIdentidad" formControlName="documentoIdentidad" placeholder="Documento de Identidad">
+          </div>
+        </div>
+        <div class="form-group row m-2">
+          <label for="fechaNacimiento" class="col-sm-5 col-form-label">Fecha Nacimiento:</label>
+          <div class="col-sm-6">
+            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+          </div>
+        </div>
+        <div class="form-group row m-2">
+          <label for="correoElectronico" class="col-sm-5 col-form-label">Correo Electronico:</label>
+          <div class="col-sm-6">
+            <input type="email" class="form-control" id="correoElectronico" formControlName="correoElectronico" placeholder="Email">
+          </div>
+        </div>
+        <div class="form-group row m-2">
+          <label for="rol" class="col-sm-5 col-form-label">Rol:</label>
+          <div class="col-sm-6">
+            <kendo-dropdownlist 
+            id="rol" 
+            formControlName="rol"
+            [data]="listaRoles"
+            textField="nombre"
+            valueField="id"
+            >
+            </kendo-dropdownlist>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" (click)="modal.close('Save click')">
+      Cancelar
+    </button>
+    <button class="btn btn-success" (click)="guardar_elemento()">
+      Guardar
+    </button>
   </div>
 </ng-template>
