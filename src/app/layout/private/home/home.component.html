@@ -1,17 +1,45 @@
-<div class="card p-2">
-    <div class="row card-title ml-2"  style="background-color: rgb(14, 74, 131);"> 
-        <button class="col-auto btn"><span class="k-icon k-i-menu" style="color: white;"></span></button>
-        <h1 class="col-auto" style="color: white;">Home Paz Perú</h1>
+<div class="card m-5">
+    <div class="card-title"  style="background-color: rgb(14, 74, 131);">
+        <h1 class="m-2" style="color: white;">(M) Usuarios</h1>
     </div>
+
     <div class="card-body">
         <div class="row">
-            <kendo-grid [data]="gridData"  id="my-grid">
-                <kendo-grid-column field="ProductID" title="ID"> </kendo-grid-column>
-                <kendo-grid-column field="ProductName" title="Name"> </kendo-grid-column>
-                <kendo-grid-column field="Category.CategoryName" title="Category">
+            <kendo-grid [data]="gridData"  id="my-grid" >
+                <ng-template kendoGridToolbarTemplate>
+                  <button class="btn btn-success" kendoGridAddCommand>
+                    <span class="k-icon k-i-plus"></span>
+                    Nuevo
+                  </button>
+                </ng-template>
+                <kendo-grid-column field="ProductID" title="ID" [width]="40"> </kendo-grid-column>
+                <kendo-grid-column field="ProductName" title="Nombre"> </kendo-grid-column>
+                <kendo-grid-column field="Category.CategoryName" title="Categoria">
                 </kendo-grid-column>
-                <kendo-grid-column field="UnitPrice" title="Price"> </kendo-grid-column>
-              </kendo-grid>
+                <kendo-grid-column field="UnitPrice" title="Precio"> </kendo-grid-column>
+                <kendo-grid-column title="Opciones" [width]="140">
+                  <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem>
+                    <button class="btn btn-warning m-1">
+                      <span class="k-icon k-i-edit"></span>
+                    </button>
+                    <button class="btn btn-danger m-1" (click)="eliminar_elemento(dataItem)">
+                      <span class="k-icon k-i-delete"></span>
+                    </button>
+                  </ng-template>
+                </kendo-grid-column>
+            </kendo-grid>
         </div>
     </div>
 </div>
+
+<ng-template #modalTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title">Título del Modal</h4>
+    <button type="button" class="close" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Contenido del modal
+  </div>
+</ng-template>

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
 import { RowClassArgs } from '@progress/kendo-angular-treelist';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,10 @@ import { RowClassArgs } from '@progress/kendo-angular-treelist';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent {
+  // constructor(
+  //   private modalService: BsModalService
+  // ){}
+  constructor(){}
   public gridData: any = [
     {
       ProductID: 1,
@@ -42,4 +47,12 @@ export class HomeComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
   }
+  eliminar_elemento(dataItem:any){
+    console.log(dataItem);
+    this.gridData.splice(this.gridData.indexOf(dataItem), 1);
+  }
+  // abrir_modal(template: any){
+  //   console.log("abrir modal");
+  //   this.modalService.show(template, {class: 'modal-sm'});
+  // }
 }
