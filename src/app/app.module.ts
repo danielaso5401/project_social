@@ -37,6 +37,7 @@ import { SortableModule } from '@progress/kendo-angular-sortable';
 import { ToolBarModule } from '@progress/kendo-angular-toolbar';
 import { GanttModule } from '@progress/kendo-angular-gantt';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { GridModule } from '@progress/kendo-angular-grid';
     ToolBarModule,
     GanttModule,
     GridModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

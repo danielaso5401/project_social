@@ -6,7 +6,7 @@
         <div class="row">
             <kendo-grid [data]="gridDataUsuarios"  id="my-grid" >
                 <ng-template kendoGridToolbarTemplate>
-                  <button class="btn btn-success" kendoGridAddCommand (click)="open(mymodal)">
+                  <button class="btn btn-success" kendoGridAddCommand (click)="open(mymodal, 'new')">
                     <span class="k-icon k-i-plus"></span>
                     Nuevo
                   </button>
@@ -26,7 +26,7 @@
                 </kendo-grid-column>
                 <kendo-grid-column title="Opciones" [width]="140">
                   <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem>
-                    <button class="btn btn-warning m-1">
+                    <button class="btn btn-warning m-1" (click)="open(mymodal, dataItem)">
                       <span class="k-icon k-i-edit"></span>
                     </button>
                     <button class="btn btn-danger m-1" (click)="eliminar_elemento(dataItem)">
@@ -96,8 +96,11 @@
     <button class="btn btn-danger" (click)="modal.close('Save click')">
       Cancelar
     </button>
-    <button class="btn btn-success" (click)="guardar_elemento()">
+    <button class="btn btn-success" *ngIf="!validar" (click)="guardar_elemento()">
       Guardar
+    </button>
+    <button class="btn btn-warning" *ngIf="validar" (click)="actualizar_elemento()">
+      Editar
     </button>
   </div>
 </ng-template>

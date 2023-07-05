@@ -19,7 +19,8 @@ export class HomeComponent {
   ){} 
 
   form!: FormGroup;
-  
+  validar: boolean = false;
+
   listaRoles: any = [
     { nombre: "<Roles>", id: null},
     { nombre: "Administrador", id: 1 },
@@ -41,7 +42,9 @@ export class HomeComponent {
       }
     }
   ]
-  
+  formGroupToObject(formGroup: FormGroup): any {
+    return formGroup.value;
+  }
   ngOnInit(): void {
     this.buildForm();
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -62,12 +65,33 @@ export class HomeComponent {
     this.gridDataUsuarios.splice(this.gridDataUsuarios.indexOf(dataItem), 1);
   }
   guardar_elemento(){
+    const json = this.formGroupToObject(this.form);
     console.log(this.form.value);
     this.gridDataUsuarios = this.gridDataUsuarios.concat(this.form.value);
     this.modalService.dismissAll();
   }
-  open(content:any) {
+  actualizar_elemento(){
+    const json = this.formGroupToObject(this.form);
+    console.log(json);
+    this.gridDataUsuarios[this.gridDataUsuarios.indexOf(this.form.value)+1] = this.form.value;
+    this.modalService.dismissAll();
+  }
+  open(content:any, event:any) {
+    this.form.reset();
+    if(event !== "new"){
+      this.form.get('nombres')?.setValue(event.nombres);
+      this.form.get('apellidos')?.setValue(event.apellidos);
+      this.form.get('documentoIdentidad')?.setValue(event.documentoIdentidad);
+      this.form.get('fechaNacimiento')?.setValue(event.fechaNacimiento);
+      this.form.get('correoElectronico')?.setValue(event.correoElectronico);
+      this.form.get('rol')?.setValue({id: event.rol.id, nombre: event.rol.nombre});
+      this.validar = true;
+    }
+    else{
+      this.validar = false;
+    }
     this.modalService.open(content, {size:"lg"});
+    
   }
   
 }
