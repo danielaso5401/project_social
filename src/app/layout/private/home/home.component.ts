@@ -4,6 +4,8 @@ import { RowClassArgs } from '@progress/kendo-angular-treelist';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { Size } from '@progress/kendo-drawing/dist/npm/geometry';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SVGIcon, bellIcon, calendarIcon, deliciousIcon, envelopLinkIcon, graphIcon, inboxIcon, inheritedIcon, menuIcon, myspaceBoxIcon, starOutlineIcon, userIcon } from '@progress/kendo-svg-icons';
+import { DrawerItem, DrawerSelectEvent } from '@progress/kendo-angular-layout';
 
 @Component({
   selector: 'app-home',
@@ -12,21 +14,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomeComponent {
-  
+
   constructor(
     private modalService: NgbModal,
     private formBuilder: FormBuilder
-  ){} 
+  ){}
 
   form!: FormGroup;
   validar: boolean = false;
+
+
+
 
   listaRoles: any = [
     { nombre: "<Roles>", id: null},
     { nombre: "Administrador", id: 1 },
     { nombre: "Enfermera", id: 2 },
     { nombre: "Psigcolaga", id: 3 },
-  ]; 
+  ];
 
   gridDataUsuarios : any = [
     {
@@ -50,6 +55,7 @@ export class HomeComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
   }
+
   buildForm() {
     this.form = this.formBuilder.group({
       nombres: ['', Validators.required],
@@ -91,7 +97,7 @@ export class HomeComponent {
       this.validar = false;
     }
     this.modalService.open(content, {size:"lg"});
-    
+
   }
-  
+
 }

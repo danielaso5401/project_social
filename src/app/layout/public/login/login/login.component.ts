@@ -14,7 +14,7 @@ export class LoginComponent implements  OnInit{
 
   constructor  (
     private fb: FormBuilder
-    ,private router: Router  
+    ,private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +30,6 @@ export class LoginComponent implements  OnInit{
   public submitFormulario(){
     this.router.navigateByUrl('/home');
     console.log(this.myForm.value);
-    
+
   }
 }

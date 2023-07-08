@@ -1,2 +1,27 @@
 <!-- <app-login class="mt-5 d-flex justify-content-center align-items-center"></app-login> -->
+<kendo-appbar *ngIf="currentUrl!='/login'">
+  <kendo-appbar-section>
+    <button kendoButton fillMode="flat" (click)="drawer.toggle()">
+      <kendo-icon name="menu"></kendo-icon>
+    </button>
+    <kendo-appbar-section class="ml-2">
+      <h3 class="title">ONG PAZ PERÚ</h3>
+    </kendo-appbar-section>
+  </kendo-appbar-section>
+</kendo-appbar>
+
+<kendo-drawer-container>
+  <kendo-drawer
+    #drawer
+    [items]="items"
+    mode="push"
+    [mini]="currentUrl!='/login' ? true : false"
+    [expanded]="false"
+    (select)="onSelect($event)"
+  >
+  </kendo-drawer>
+
+  <kendo-drawer-content>
 <router-outlet></router-outlet>
+</kendo-drawer-content>
+</kendo-drawer-container>

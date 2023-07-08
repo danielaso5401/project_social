@@ -1,46 +1,47 @@
+
 <div class="card m-5">
-    <div class="card-title"  style="background-color: rgb(14, 74, 131);">
-        <h3 class="m-2" style="color: white;">(M) Usuarios</h3>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <kendo-grid [data]="gridDataUsuarios"  id="my-grid" >
-                <ng-template kendoGridToolbarTemplate>
-                  <button class="btn btn-success" kendoGridAddCommand (click)="open(mymodal, 'new')">
-                    <span class="k-icon k-i-plus"></span>
-                    Nuevo
-                  </button>
-                </ng-template>
-                <kendo-grid-column field="id" title="ID" [width]="40"[hidden]="true"> </kendo-grid-column>
-                <kendo-grid-column field="nombres" title="Nombre"></kendo-grid-column>
-                <kendo-grid-column field="apellidos" title="Apellidos"></kendo-grid-column>
-                <kendo-grid-column field="documentoIdentidad" title="DNI"></kendo-grid-column>
-                <kendo-grid-column field="fechaNacimiento" title="Fecha Nacimiento">
-                  <ng-template kendoGridCellTemplate let-dataItem>
-                    {{dataItem.fechaNacimiento | date:'dd/MM/yyyy'}}
-                  </ng-template>
-                </kendo-grid-column>
-                <kendo-grid-column field="correoElectronico" title="Email">
-                </kendo-grid-column>
-                <kendo-grid-column field="rol.nombre" title="Rol">
-                </kendo-grid-column>
-                <kendo-grid-column title="Opciones" [width]="140">
-                  <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem>
-                    <button class="btn btn-warning m-1" (click)="open(mymodal, dataItem)">
-                      <span class="k-icon k-i-edit"></span>
-                    </button>
-                    <button class="btn btn-danger m-1" (click)="eliminar_elemento(dataItem)">
-                      <span class="k-icon k-i-delete"></span>
+      <div class="card-title"  style="background-color: #770a02;">
+          <h3 class="m-2" style="color: white;">(M) Usuarios</h3>
+      </div>
+      <div class="card-body">
+          <div class="row">
+              <kendo-grid [data]="gridDataUsuarios"  id="my-grid" >
+                  <ng-template kendoGridToolbarTemplate>
+                    <button class="btn btn-success" kendoGridAddCommand (click)="open(mymodal, 'new')">
+                      <span class="k-icon k-i-plus"></span>
+                      Nuevo
                     </button>
                   </ng-template>
-                </kendo-grid-column>
-            </kendo-grid>
-        </div>
-    </div>
+                  <kendo-grid-column field="id" title="ID" [width]="40"[hidden]="true"> </kendo-grid-column>
+                  <kendo-grid-column field="nombres" title="Nombre"></kendo-grid-column>
+                  <kendo-grid-column field="apellidos" title="Apellidos"></kendo-grid-column>
+                  <kendo-grid-column field="documentoIdentidad" title="DNI"></kendo-grid-column>
+                  <kendo-grid-column field="fechaNacimiento" title="Fecha Nacimiento">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                      {{dataItem.fechaNacimiento | date:'dd/MM/yyyy'}}
+                    </ng-template>
+                  </kendo-grid-column>
+                  <kendo-grid-column field="correoElectronico" title="Email">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="rol.nombre" title="Rol">
+                  </kendo-grid-column>
+                  <kendo-grid-column title="Opciones" [width]="140">
+                    <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem>
+                      <button class="btn btn-warning m-1" (click)="open(mymodal, dataItem)">
+                        <span class="k-icon k-i-edit"></span>
+                      </button>
+                      <button class="btn btn-danger m-1" (click)="eliminar_elemento(dataItem)">
+                        <span class="k-icon k-i-delete"></span>
+                      </button>
+                    </ng-template>
+                  </kendo-grid-column>
+              </kendo-grid>
+          </div>
+      </div>
 </div>
 
 <ng-template #mymodal let-modal>
-  <div class="modal-header text-white" style="background-color: rgb(14, 74, 131);">
+  <div class="modal-header text-white" style="background-color: #770a02;">
     <h4 class="modal-title" id="modal-basic-title">Crear Nuevo Usuario</h4>
   </div>
   <div class="modal-body">
@@ -79,8 +80,8 @@
         <div class="form-group row m-2">
           <label for="rol" class="col-sm-5 col-form-label">Rol:</label>
           <div class="col-sm-6">
-            <kendo-dropdownlist 
-            id="rol" 
+            <kendo-dropdownlist
+            id="rol"
             formControlName="rol"
             [data]="listaRoles"
             textField="nombre"
