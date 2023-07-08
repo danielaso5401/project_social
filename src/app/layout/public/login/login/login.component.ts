@@ -35,7 +35,7 @@ export class LoginComponent implements  OnInit{
   public submitFormulario(){
     this.router.navigateByUrl('/home');
     console.log(this.myForm.value);
-    
+
   }
   public Peticion(){
     this.linkService.postJsonResponse(constApi.RutaEjemplo,{username: "123456789as", password: "admin12345"}).subscribe(
