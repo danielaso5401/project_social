@@ -10,6 +10,7 @@ import { LoginComponent } from './layout/public/login/login/login.component';
 import { HomeComponent } from './layout/private/home/home.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { InputsModule } from '@progress/kendo-angular-inputs';
@@ -80,6 +81,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     GanttModule,
     GridModule,
     NgbModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
