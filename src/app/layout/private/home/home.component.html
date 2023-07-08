@@ -5,23 +5,32 @@
       </div>
       <div class="card-body">
           <div class="row">
-              <kendo-grid [data]="gridDataUsuarios"  id="my-grid" >
+              <kendo-grid 
+              [data]="gridDataUsuarios"  
+              [loading]="chargeGrid"
+              id="my-grid" >
                   <ng-template kendoGridToolbarTemplate>
                     <button class="btn btn-success" kendoGridAddCommand (click)="open(mymodal, 'new')">
                       <span class="k-icon k-i-plus"></span>
                       Nuevo
                     </button>
                   </ng-template>
-                  <kendo-grid-column field="id" title="ID" [width]="40"[hidden]="true"> </kendo-grid-column>
-                  <kendo-grid-column field="nombres" title="Nombre"></kendo-grid-column>
-                  <kendo-grid-column field="apellidos" title="Apellidos"></kendo-grid-column>
-                  <kendo-grid-column field="documentoIdentidad" title="DNI"></kendo-grid-column>
-                  <kendo-grid-column field="fechaNacimiento" title="Fecha Nacimiento">
+                  <kendo-grid-column field="Id" title="ID" [width]="40"[hidden]="true"> </kendo-grid-column>
+                  <kendo-grid-column field="Nombre" title="Nombre"></kendo-grid-column>
+                  <kendo-grid-column field="ApellidoPaterno" title="Apellidos">
                     <ng-template kendoGridCellTemplate let-dataItem>
-                      {{dataItem.fechaNacimiento | date:'dd/MM/yyyy'}}
+                      {{dataItem.ApellidoPaterno}} {{dataItem.ApellidoMaterno}}
                     </ng-template>
                   </kendo-grid-column>
-                  <kendo-grid-column field="correoElectronico" title="Email">
+                  <kendo-grid-column field="DocumentoIdentidad" title="DNI"></kendo-grid-column>
+                  <kendo-grid-column field="FechaNacimiento" title="Fecha Nacimiento">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                      {{dataItem.FechaNacimiento | date:'dd/MM/yyyy'}}
+                    </ng-template>
+                  </kendo-grid-column>
+                  <kendo-grid-column field="Celular" title="Celular">
+                  </kendo-grid-column>
+                  <kendo-grid-column field="Direccion" title="Direccion">
                   </kendo-grid-column>
                   <kendo-grid-column field="rol.nombre" title="Rol">
                   </kendo-grid-column>
@@ -48,36 +57,54 @@
     <form [formGroup]="form">
       <div class="form">
         <div class="form-group row m-2">
-          <label for="nombres" class="col-sm-5 col-form-label">Nombres:</label>
+          <label for="Nombre" class="col-sm-5 col-form-label">Nombres:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="nombres" formControlName="nombres" placeholder="Nombres Completos">
+            <input type="text" class="form-control" id="Nombre" formControlName="Nombre" placeholder="Nombres Completos">
           </div>
         </div>
         <div class="form-group row m-2">
-          <label for="apellidos" class="col-sm-5 col-form-label">Apellidos:</label>
+          <label for="ApellidoPaterno" class="col-sm-5 col-form-label">Apellido Paterno:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="apellidos" formControlName="apellidos" placeholder="Apellidos Completos">
+            <input type="text" class="form-control" id="ApellidoPaterno" formControlName="ApellidoPaterno" placeholder="Apellidos Completos">
           </div>
         </div>
         <div class="form-group row m-2">
-          <label for="dni" class="col-sm-5 col-form-label">DNI:</label>
+          <label for="ApellidoMaterno" class="col-sm-5 col-form-label">Apellido Materno:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="documentoIdentidad" formControlName="documentoIdentidad" placeholder="Documento de Identidad">
+            <input type="text" class="form-control" id="ApellidoMaterno" formControlName="ApellidoMaterno" placeholder="Apellidos Completos">
           </div>
         </div>
         <div class="form-group row m-2">
-          <label for="fechaNacimiento" class="col-sm-5 col-form-label">Fecha Nacimiento:</label>
+          <label for="DocumentoIdentidad" class="col-sm-5 col-form-label">Documento de identidad:</label>
           <div class="col-sm-6">
-            <input type="date" class="form-control" id="fechaNacimiento" formControlName="fechaNacimiento">
+            <input type="text" class="form-control" id="documentoIdentidad" formControlName="DocumentoIdentidad" placeholder="Documento de Identidad">
           </div>
         </div>
         <div class="form-group row m-2">
-          <label for="correoElectronico" class="col-sm-5 col-form-label">Correo Electronico:</label>
+          <label for="FechaNacimiento" class="col-sm-5 col-form-label">Fecha Nacimiento:</label>
           <div class="col-sm-6">
-            <input type="email" class="form-control" id="correoElectronico" formControlName="correoElectronico" placeholder="Email">
+            <input type="date" class="form-control" id="fechaNacimiento" formControlName="FechaNacimiento">
           </div>
         </div>
         <div class="form-group row m-2">
+          <label for="Direccion" class="col-sm-5 col-form-label">Drirección:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="Direccion" formControlName="Direccion" placeholder="Direccion">
+          </div>
+        </div>
+        <div class="form-group row m-2">
+          <label for="Celular" class="col-sm-5 col-form-label">Celular:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="Direccion" formControlName="Celular" placeholder="Celular">
+          </div>
+        </div>
+        <div class="form-group row m-2">
+          <label for="Contrasena" class="col-sm-5 col-form-label">Contraseña:</label>
+          <div class="col-sm-6">
+            <input type="password" class="form-control" id="Contrasena" formControlName="Contrasena" placeholder="Contraseña">
+          </div>
+        </div>
+        <!-- <div class="form-group row m-2">
           <label for="rol" class="col-sm-5 col-form-label">Rol:</label>
           <div class="col-sm-6">
             <kendo-dropdownlist
@@ -89,7 +116,7 @@
             >
             </kendo-dropdownlist>
           </div>
-        </div>
+        </div> -->
       </div>
     </form>
   </div>

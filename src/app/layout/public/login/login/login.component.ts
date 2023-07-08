@@ -33,20 +33,49 @@ export class LoginComponent implements  OnInit{
     })
   }
   public submitFormulario(){
-    this.router.navigateByUrl('/home');
+    // this.router.navigateByUrl('/home');
     console.log(this.myForm.value);
-
-  }
-  public Peticion(){
-    this.linkService.postJsonResponse(constApi.RutaEjemplo,{username: "123456789as", password: "admin12345"}).subscribe(
+    let objUser ={
+      username: this.myForm.get('usuario')?.value,
+      password: this.myForm.get('password')?.value,
+    }
+    this.linkService.postJsonResponse(constApi.RutaEjemplo,objUser).subscribe(
       {
         next: (resp : any) => {
           console.log(resp);
+          if (this.myForm.get('recordar')?.value == true) {
+            // localStorage.setItem('token', resp.body.token);
+          }
+          this.router.navigateByUrl('/home');
+          
         },
         error: (error: any) => {
           console.log(error);
+          alert('Usuario o contraseña incorrectos');
         }
       }
     )
+    
+  }
+  public Peticion(){
+    const token = localStorage.getItem('token');
+    // Verificar si el token existe y realizar las acciones correspondientes
+    if (token) {
+      alert('El usuario ya está autenticado');
+      // El usuario está autenticado, realiza las acciones necesarias, como redireccionar a una página de inicio de sesión exitoso.
+    } else {
+      alert('El usuario no está autenticado');
+      // El usuario no está autenticado, redirige a la página de inicio de sesión.
+    }
+    // this.linkService.postJsonResponse(constApi.RutaEjemplo,{username: "123456789as", password: "admin12345"}).subscribe(
+    //   {
+    //     next: (resp : any) => {
+    //       console.log(resp);
+    //     },
+    //     error: (error: any) => {
+    //       console.log(error);
+    //     }
+    //   }
+    // )
   }
 }
