@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DrawerItem, DrawerSelectEvent } from '@progress/kendo-angular-layout';
-import { SVGIcon, bellIcon, calendarIcon, deliciousIcon, envelopLinkIcon, graphIcon, inboxIcon, inheritedIcon, menuIcon, myspaceBoxIcon, starOutlineIcon, userIcon } from '@progress/kendo-svg-icons';
+import { SVGIcon, bellIcon, calendarIcon, deliciousIcon, envelopLinkIcon, logoutIcon, graphIcon, inboxIcon, inheritedIcon, menuIcon, myspaceBoxIcon, starOutlineIcon, userIcon } from '@progress/kendo-svg-icons';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { HomeComponent } from './layout/private/home/home.component';
@@ -48,5 +48,9 @@ export class AppComponent {
   }
   onSelect(ev: DrawerSelectEvent): void {
     this.selected = ev.item.text;
+  }
+  cerrarSesion(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
 }

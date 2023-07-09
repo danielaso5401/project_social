@@ -15,7 +15,7 @@ export class LoginComponent implements  OnInit{
   public myForm!: FormGroup;
 
   constructor  (
-    
+
     private fb: FormBuilder,
     private router: Router,
     private linkService: LinkService,
@@ -44,10 +44,9 @@ export class LoginComponent implements  OnInit{
         next: (resp : any) => {
           console.log(resp);
           if (this.myForm.get('recordar')?.value == true) {
-            // localStorage.setItem('token', resp.body.token);
+            localStorage.setItem('token', resp.body.success);
           }
           this.router.navigateByUrl('/home');
-          
         },
         error: (error: any) => {
           console.log(error);
@@ -55,14 +54,13 @@ export class LoginComponent implements  OnInit{
         }
       }
     )
-    
+
   }
   public Peticion(){
     const token = localStorage.getItem('token');
     // Verificar si el token existe y realizar las acciones correspondientes
     if (token) {
-      alert('El usuario ya está autenticado');
-      // El usuario está autenticado, realiza las acciones necesarias, como redireccionar a una página de inicio de sesión exitoso.
+      this.router.navigateByUrl('/home')
     } else {
       alert('El usuario no está autenticado');
       // El usuario no está autenticado, redirige a la página de inicio de sesión.

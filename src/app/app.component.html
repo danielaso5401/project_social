@@ -7,6 +7,16 @@
     <kendo-appbar-section class="ml-2">
       <h3 class="title">ONG PAZ PERÚ</h3>
     </kendo-appbar-section>
+    <kendo-appbar-spacer></kendo-appbar-spacer>
+
+  </kendo-appbar-section>
+  <kendo-appbar-section class="actions">
+    <kendo-badge-container class="justify-content-center">
+      <button kendoButton fillMode="flat" (click)="cerrarSesion()">
+        <span class="k-icon k-i-logout"></span>
+        <label>Cerrar Sesión</label>
+      </button>
+    </kendo-badge-container>
   </kendo-appbar-section>
 </kendo-appbar>
 

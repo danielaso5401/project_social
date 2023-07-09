@@ -5,8 +5,8 @@
       </div>
       <div class="card-body">
           <div class="row">
-              <kendo-grid 
-              [data]="gridDataUsuarios"  
+              <kendo-grid
+              [data]="gridDataUsuarios"
               [loading]="chargeGrid"
               id="my-grid" >
                   <ng-template kendoGridToolbarTemplate>
@@ -32,7 +32,10 @@
                   </kendo-grid-column>
                   <kendo-grid-column field="Direccion" title="Direccion">
                   </kendo-grid-column>
-                  <kendo-grid-column field="rol.nombre" title="Rol">
+                  <kendo-grid-column field="IdRol" title="Rol">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                      {{ getRolNombre(dataItem.IdRol) }}
+                    </ng-template>
                   </kendo-grid-column>
                   <kendo-grid-column title="Opciones" [width]="140">
                     <ng-template kendoGridCellTemplate let-isNew="isNew" let-dataItem>
@@ -51,7 +54,7 @@
 
 <ng-template #mymodal let-modal>
   <div class="modal-header text-white" style="background-color: #770a02;">
-    <h4 class="modal-title" id="modal-basic-title">Crear Nuevo Usuario</h4>
+    <h4 class="modal-title" id="modal-basic-title">{{validar ? "Editar Usuario" : "Crear Nuevo Usuario"}}</h4>
   </div>
   <div class="modal-body">
     <form [formGroup]="form">
@@ -59,25 +62,25 @@
         <div class="form-group row m-2">
           <label for="Nombre" class="col-sm-5 col-form-label">Nombres:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="Nombre" formControlName="Nombre" placeholder="Nombres Completos">
+            <input type="text" class="form-control" id="Nombre" formControlName="Nombre" placeholder="Nombres Completos" required>
           </div>
         </div>
         <div class="form-group row m-2">
           <label for="ApellidoPaterno" class="col-sm-5 col-form-label">Apellido Paterno:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ApellidoPaterno" formControlName="ApellidoPaterno" placeholder="Apellidos Completos">
+            <input type="text" class="form-control" id="ApellidoPaterno" formControlName="ApellidoPaterno" placeholder="Apellidos Completos" required>
           </div>
         </div>
         <div class="form-group row m-2">
           <label for="ApellidoMaterno" class="col-sm-5 col-form-label">Apellido Materno:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="ApellidoMaterno" formControlName="ApellidoMaterno" placeholder="Apellidos Completos">
+            <input type="text" class="form-control" id="ApellidoMaterno" formControlName="ApellidoMaterno" placeholder="Apellidos Completos" required>
           </div>
         </div>
         <div class="form-group row m-2">
           <label for="DocumentoIdentidad" class="col-sm-5 col-form-label">Documento de identidad:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="documentoIdentidad" formControlName="DocumentoIdentidad" placeholder="Documento de Identidad">
+            <input type="text" class="form-control" id="documentoIdentidad" formControlName="DocumentoIdentidad" placeholder="Documento de Identidad" required>
           </div>
         </div>
         <div class="form-group row m-2">
@@ -89,34 +92,35 @@
         <div class="form-group row m-2">
           <label for="Direccion" class="col-sm-5 col-form-label">Drirección:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="Direccion" formControlName="Direccion" placeholder="Direccion">
+            <input type="text" class="form-control" id="Direccion" formControlName="Direccion" placeholder="Direccion" required>
           </div>
         </div>
         <div class="form-group row m-2">
           <label for="Celular" class="col-sm-5 col-form-label">Celular:</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" id="Direccion" formControlName="Celular" placeholder="Celular">
+            <input type="text" class="form-control" id="Direccion" formControlName="Celular" placeholder="Celular" required>
           </div>
         </div>
         <div class="form-group row m-2">
           <label for="Contrasena" class="col-sm-5 col-form-label">Contraseña:</label>
           <div class="col-sm-6">
-            <input type="password" class="form-control" id="Contrasena" formControlName="Contrasena" placeholder="Contraseña">
+            <input type="password" [readOnly]="validar ? true : false" class="form-control" id="Contrasena" formControlName="Contrasena" placeholder="Contraseña" required>
           </div>
         </div>
-        <!-- <div class="form-group row m-2">
+        <div class="form-group row m-2">
           <label for="rol" class="col-sm-5 col-form-label">Rol:</label>
           <div class="col-sm-6">
             <kendo-dropdownlist
             id="rol"
             formControlName="rol"
             [data]="listaRoles"
-            textField="nombre"
-            valueField="id"
+            textField="Nombre"
+            valueField="IdRol"
+            required
             >
             </kendo-dropdownlist>
           </div>
-        </div> -->
+        </div>
       </div>
     </form>
   </div>
